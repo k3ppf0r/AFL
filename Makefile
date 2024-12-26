@@ -14,6 +14,7 @@
 #
 
 PROGNAME    = afl
+# #不需要转义，但能working. e.g. echo '#define VERSION "2.57b"' | grep '^\#\d\efine VERSION '
 VERSION     = $(shell grep '^\#define VERSION ' config.h | cut -d '"' -f2)
 
 PREFIX     ?= /usr/local

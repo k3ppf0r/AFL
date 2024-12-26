@@ -1,0 +1,198 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-gcc",
+      "afl-gcc.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-gcc.c",
+    "output": "/home/fuzz/Documents/AFL/afl-gcc"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-fuzz",
+      "afl-fuzz.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-fuzz.c",
+    "output": "/home/fuzz/Documents/AFL/afl-fuzz"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-showmap",
+      "afl-showmap.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-showmap.c",
+    "output": "/home/fuzz/Documents/AFL/afl-showmap"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-tmin",
+      "afl-tmin.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-tmin.c",
+    "output": "/home/fuzz/Documents/AFL/afl-tmin"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-gotcpu",
+      "afl-gotcpu.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-gotcpu.c",
+    "output": "/home/fuzz/Documents/AFL/afl-gotcpu"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-analyze",
+      "afl-analyze.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-analyze.c",
+    "output": "/home/fuzz/Documents/AFL/afl-analyze"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "afl-as",
+      "afl-as.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/afl-as.c",
+    "output": "/home/fuzz/Documents/AFL/afl-as"
+  },
+  {
+    "arguments": [
+      "./afl-gcc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-o",
+      "test-instr",
+      "test-instr.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/test-instr.c",
+    "output": "/home/fuzz/Documents/AFL/test-instr"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-O3",
+      "-funroll-loops",
+      "-Wall",
+      "-D_FORTIFY_SOURCE=2",
+      "-g",
+      "-Wno-pointer-sign",
+      "-DAFL_PATH=\"/usr/local/lib/afl\"",
+      "-DDOC_PATH=\"/usr/local/share/doc/afl\"",
+      "-DBIN_PATH=\"/usr/local/bin\"",
+      "-B",
+      ".",
+      "-g",
+      "-O3",
+      "-funroll-loops",
+      "-D__AFL_COMPILER=1",
+      "-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION=1",
+      "-o",
+      "test-instr",
+      "test-instr.c"
+    ],
+    "directory": "/home/fuzz/Documents/AFL",
+    "file": "/home/fuzz/Documents/AFL/test-instr.c",
+    "output": "/home/fuzz/Documents/AFL/test-instr"
+  }
+]

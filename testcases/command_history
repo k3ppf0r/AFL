@@ -1,0 +1,7 @@
+# 使用 -fno-asynchronous-unwind-tables 以去除 .cfi 指令
+AFL_KEEP_ASSEMBLY=1 AFL_DONT_OPTIMIZE=1 ../afl-gcc test_as.c -o test_as -O0 -fno-asynchronous-unwind-tables
+
+gcc -S test_as.c -O0 -fno-asynchronous-unwind-tables  -o test_as1.o
+
+ls -al /tmp/.afl-16830-1734879283.s
+cp /tmp/.afl-16830-1734879283.s ./

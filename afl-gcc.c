@@ -26,6 +26,8 @@
 
    (Of course, use CXX and point it to afl-g++ / afl-clang++ for C++ code.)
 
+  $ make clean
+  $ bear -- make
    The wrapper needs to know the path to afl-as (renamed to 'as'). The default
    is /usr/local/lib/afl/. A convenient way to specify alternative directories
    would be to set AFL_PATH.
@@ -81,12 +83,13 @@ static void find_as(u8* argv0) {
   }
 
   slash = strrchr(argv0, '/');
-
+  // 如果找到了斜杠，则意味着 argv0 包含路径信息
   if (slash) {
 
     u8 *dir;
 
     *slash = 0;
+    // 截取到 argv0 的目录部分
     dir = ck_strdup(argv0);
     *slash = '/';
 
@@ -102,7 +105,8 @@ static void find_as(u8* argv0) {
     ck_free(dir);
 
   }
-
+  // fallback，如果前两个位置都找不到，则去编译 afl-gcc 时定义的 AFL_PATH 去找
+  // 默认情况下，AFL_PATH 由 Makefile 定义成 "/usr/local/lib/afl"
   if (!access(AFL_PATH "/as", X_OK)) {
     as_path = AFL_PATH;
     return;
@@ -185,6 +189,10 @@ static void edit_params(u32 argc, char** argv) {
 
   }
 
+  // 忽略-B指定编译器工具链中各个组件的搜索路径 -integrated-as集成汇编器 -pipe管道传递前后端
+  // -fsanitize=address：启用地址sanitizer，它可以检测如缓冲区溢出、使用后释放（use-after-free）等内存错误。
+  // -fsanitize=memory：启用内存sanitizer，它提供了更广泛的内存错误检测，包括未定义行为的内存访问等。
+  // FORTIFY_SOURCE 是GCC的一个宏，用于在编译时提供额外的安全检查，以防止一些常见的安全漏洞，如缓冲区溢出、边界检查
   while (--argc) {
     u8* cur = *(++argv);
 
@@ -209,11 +217,11 @@ static void edit_params(u32 argc, char** argv) {
         !strcmp(cur, "-fsanitize=memory")) asan_set = 1;
 
     if (strstr(cur, "FORTIFY_SOURCE")) fortify_set = 1;
-
+    // 剩余放入参数列表
     cc_params[cc_par_cnt++] = cur;
 
   }
-
+  // 最关键的一步是加入了 -B as_path 这个 flag，使得下游编译器在汇编过程中，以 afl-as 替换了原生的汇编器
   cc_params[cc_par_cnt++] = "-B";
   cc_params[cc_par_cnt++] = as_path;
 
@@ -287,7 +295,7 @@ static void edit_params(u32 argc, char** argv) {
     cc_params[cc_par_cnt++] = "-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION=1";
 
   }
-
+  // -fno-builtin 意味着GCC不会尝试用内置编译的代码替换库函数，采用glibc 标准实现
   if (getenv("AFL_NO_BUILTIN")) {
 
     cc_params[cc_par_cnt++] = "-fno-builtin-strcmp";
@@ -332,9 +340,10 @@ int main(int argc, char** argv) {
     exit(1);
 
   }
-
+  // 需要afl-as
   find_as(argv[0]);
 
+  // 调整相关编译参数
   edit_params(argc, argv);
 
   execvp(cc_params[0], (char**)cc_params);

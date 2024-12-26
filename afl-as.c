@@ -195,7 +195,7 @@ static void edit_params(int argc, char** argv) {
     }
 
     if (input_file[1]) FATAL("Incorrect use (not called through afl-gcc?)");
-      else input_file = NULL;
+    else input_file = NULL;
 
   } else {
 
@@ -511,6 +511,7 @@ int main(int argc, char** argv) {
 
   rand_seed = tv.tv_sec ^ tv.tv_usec ^ getpid();
 
+  // 初始化随机数种子
   srandom(rand_seed);
 
   edit_params(argc, argv);
@@ -530,14 +531,18 @@ int main(int argc, char** argv) {
   /* When compiling with ASAN, we don't have a particularly elegant way to skip
      ASAN-specific branches. But we can probabilistically compensate for
      that... */
+  //  AddressSanitizer
 
   if (getenv("AFL_USE_ASAN") || getenv("AFL_USE_MSAN")) {
     sanitizer = 1;
     inst_ratio /= 3;
   }
 
+  // 在汇编指令序列上插桩  
   if (!just_version) add_instrumentation();
 
+  // few 
+  // 子进程
   if (!(pid = fork())) {
 
     execvp(as_params[0], (char**)as_params);
