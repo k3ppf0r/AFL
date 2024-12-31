@@ -5,3 +5,12 @@ gcc -S test_as.c -O0 -fno-asynchronous-unwind-tables  -o test_as1.o
 
 ls -al /tmp/.afl-16830-1734879283.s
 cp /tmp/.afl-16830-1734879283.s ./
+
+# test tmin
+cd test_work
+# 编译不优化会运行不正常
+AFL_KEEP_ASSEMBLY=1 AFL_DONT_OPTIMIZE=1 ../../afl-gcc test_tmin.c -o test_tmin -O0 -fno-asynchronous-unwind-tables
+# 正常
+ ../../afl-gcc test_tmin.c -o test_tmin
+
+../../afl-tmin -i in -o out -- ./test_tmin
