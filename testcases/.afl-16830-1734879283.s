@@ -16,7 +16,7 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x0000eb91, %rcx
+movq $0x0000eb91, %rcx // 向ecx中存入识别代码块的随机桩代码id
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -157,6 +157,7 @@ leaq (128+24)(%rsp), %rsp
 .code64
 .align 8
 
+// RCX: 识别代码块的随机桩代码id
 __afl_maybe_log:
 // 将标志位加载到 AH
 // 将 OF 位保存在 al
@@ -200,7 +201,9 @@ __afl_setup:
 
   movq  __afl_global_area_ptr@GOTPCREL(%rip), %rdx
   movq  (%rdx), %rdx
+  // 判断rdx 是否为0
   testq %rdx, %rdx
+  // 为0 跳到__afl_setup_first
   je    __afl_setup_first
 
   movq %rdx, __afl_area_ptr(%rip)
@@ -210,7 +213,7 @@ __afl_setup_first:
 
   /* Save everything that is not yet saved and that may be touched by
      getenv() and several other libcalls we'll be relying on. */
-
+  // 
   leaq -352(%rsp), %rsp
 
   movq %rax,   0(%rsp)
@@ -244,27 +247,33 @@ __afl_setup_first:
   /* The 64-bit ABI requires 16-byte stack alignment. We'll keep the
      original stack ptr in the callee-saved r12. */
 
+  // 堆栈对齐
   pushq %r12
   movq  %rsp, %r12
   subq  $16, %rsp
   andq  $0xfffffffffffffff0, %rsp
-
+  //0x5555555557d7 (.AFL_VARS) => getenv("__AFL_SHM_ID") 如果不存在返回0
   leaq .AFL_SHM_ENV(%rip), %rdi
 call getenv@PLT
 
   testq %rax, %rax
   je    __afl_setup_abort
 
+  // 把 __AFL_SHM_ID 从字符串转成整数
   movq  %rax, %rdi
 call atoi@PLT
 
   xorq %rdx, %rdx   /* shmat flags    */
   xorq %rsi, %rsi   /* requested addr */
+  // rax 返回值
   movq %rax, %rdi   /* SHM ID         */
 call shmat@PLT
 
   cmpq $-1, %rax
   je   __afl_setup_abort
+  /*
+    　　上面的汇编代码中，如果发现 attach 失败，则进入 AFL 的错误处理流程。不过读到这里，我们有一个小疑问：一片共享内存，首先应当由 shmget() 创建，再由 shmat() 映射到当前程序的虚拟内存空间中。那么，这片虚拟内存是什么时候创建的？答案是 afl-fuzz 在 setup_shm() 流程中调用 shmget() 创建了虚拟内存，并将 shm id 写入 __AFL_SHM_ID 环境变量。如果我们并非通过 afl-fuzz 运行程序，自然这片虚拟内存不会被创建，也不会存在 __AFL_SHM_ID 环境变量了。
+  */
 
   /* Store the address of the SHM region. */
 
@@ -287,7 +296,7 @@ __afl_forkserver:
      no SA_RESTART will mess it up). If this fails, assume that the fd is
      closed because we were execve()d from an instrumented binary, or because
      the parent doesn't want to use the fork server. */
-
+  // 等待 fuzzer 通过控制管道发送过来的命令，读入到 __afl_temp 中
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
   movq $(198 + 1), %rdi       /* file desc */
@@ -314,13 +323,16 @@ call read@PLT
 
 call fork@PLT
   cmpq $0, %rax
+  //jump if rax < 0
   jl   __afl_die
+  // child
   je   __afl_fork_resume
 
   /* In parent process: write PID to pipe, then wait for child. */
-
+  //将子进程的 pid 保存到 __afl_fork_pid 变量
   movl %eax, __afl_fork_pid(%rip)
 
+  //向 fd 199 写入子进程的 pid
   movq $4, %rdx                   /* length    */
   leaq __afl_fork_pid(%rip), %rsi /* data      */
   movq $(198 + 1), %rdi             /* file desc */
@@ -334,7 +346,7 @@ call waitpid@PLT
   jle  __afl_die
 
   /* Relay wait status to pipe, then loop back. */
-
+  // 写入状态管道告知 fuzzer
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
   movq $(198 + 1), %rdi         /* file desc */
