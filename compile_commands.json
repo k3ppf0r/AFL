@@ -16,9 +16,9 @@
       "afl-gcc",
       "afl-gcc.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-gcc.c",
-    "output": "/home/fuzz/Documents/AFL/afl-gcc"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-gcc.c",
+    "output": "/home/xiaok/AFL/afl-gcc"
   },
   {
     "arguments": [
@@ -37,9 +37,9 @@
       "afl-fuzz",
       "afl-fuzz.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-fuzz.c",
-    "output": "/home/fuzz/Documents/AFL/afl-fuzz"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-fuzz.c",
+    "output": "/home/xiaok/AFL/afl-fuzz"
   },
   {
     "arguments": [
@@ -58,9 +58,9 @@
       "afl-showmap",
       "afl-showmap.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-showmap.c",
-    "output": "/home/fuzz/Documents/AFL/afl-showmap"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-showmap.c",
+    "output": "/home/xiaok/AFL/afl-showmap"
   },
   {
     "arguments": [
@@ -79,9 +79,9 @@
       "afl-tmin",
       "afl-tmin.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-tmin.c",
-    "output": "/home/fuzz/Documents/AFL/afl-tmin"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-tmin.c",
+    "output": "/home/xiaok/AFL/afl-tmin"
   },
   {
     "arguments": [
@@ -100,9 +100,9 @@
       "afl-gotcpu",
       "afl-gotcpu.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-gotcpu.c",
-    "output": "/home/fuzz/Documents/AFL/afl-gotcpu"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-gotcpu.c",
+    "output": "/home/xiaok/AFL/afl-gotcpu"
   },
   {
     "arguments": [
@@ -121,9 +121,9 @@
       "afl-analyze",
       "afl-analyze.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-analyze.c",
-    "output": "/home/fuzz/Documents/AFL/afl-analyze"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-analyze.c",
+    "output": "/home/xiaok/AFL/afl-analyze"
   },
   {
     "arguments": [
@@ -142,9 +142,9 @@
       "afl-as",
       "afl-as.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/afl-as.c",
-    "output": "/home/fuzz/Documents/AFL/afl-as"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/afl-as.c",
+    "output": "/home/xiaok/AFL/afl-as"
   },
   {
     "arguments": [
@@ -163,9 +163,9 @@
       "test-instr",
       "test-instr.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/test-instr.c",
-    "output": "/home/fuzz/Documents/AFL/test-instr"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/test-instr.c",
+    "output": "/home/xiaok/AFL/test-instr"
   },
   {
     "arguments": [
@@ -191,8 +191,8 @@
       "test-instr",
       "test-instr.c"
     ],
-    "directory": "/home/fuzz/Documents/AFL",
-    "file": "/home/fuzz/Documents/AFL/test-instr.c",
-    "output": "/home/fuzz/Documents/AFL/test-instr"
+    "directory": "/home/xiaok/AFL",
+    "file": "/home/xiaok/AFL/test-instr.c",
+    "output": "/home/xiaok/AFL/test-instr"
   }
 ]
